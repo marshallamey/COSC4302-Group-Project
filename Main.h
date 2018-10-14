@@ -11,6 +11,6 @@ public:
 //Alex
 class Shell {
 //TODO:  Determine command structure
-//TODO:  Main loop structure
+//TODO:  Main loop structure (read print evaluate loop)
 //TODO:  Pass command object
 }
