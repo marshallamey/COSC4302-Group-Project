@@ -4,7 +4,7 @@
 # include <string>
 # include <vector>
 # include <sstream>
-# include <Main.h>
+# include "Main.h"
 
 using namespace std;
 
@@ -13,7 +13,7 @@ int parseCommand(string, Command&);
 
 int main() {
   vector<string> paths; 
-  Command cmd();  
+  Command cmd;  
   string commandLine = "Every good boy does fine";
 
   //Test functions
@@ -37,11 +37,11 @@ int main() {
 
 
 int parseCommand(string cLine, Command& cmd) {
-/*********************************************************
-* This function takes user input from the command line and
-* parses the string into a vector of substrings using 
-* whitespace as the delimiter.
-*********************************************************/
+  /*********************************************************
+   * This function takes user input from the command line and
+   * parses the string into a vector of substrings using 
+   * whitespace as the delimiter.
+   *********************************************************/
 
   string token;
   stringstream ss(cLine);
@@ -57,10 +57,10 @@ int parseCommand(string cLine, Command& cmd) {
 
 
 int parsePath(vector<string>& dirs) {
-/************************************************************ 
-* This function reads the PATH variable for this environment,
-* then builds a vector, dirs, of the directories in PATH
-************************************************************/
+  /************************************************************ 
+   * This function reads the PATH variable for this environment,
+   * then builds a vector, dirs, of the directories in PATH
+   ************************************************************/
 
   string pathEnvVar = (string)getenv("PATH");
   stringstream ss(pathEnvVar);
