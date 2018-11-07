@@ -5,6 +5,7 @@ class Command {
   std::string filename;
   std::vector<std::string> args;
 public:
+  Command();
   Command(std::string filename, std::vector<std::string> args);
   invoke(); //TODO:  Choose how failure is conveyed 
 }
