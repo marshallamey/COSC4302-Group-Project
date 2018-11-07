@@ -4,45 +4,29 @@
 # include <string>
 # include <vector>
 # include <sstream>
-
-# define LINE_LEN      80
-# define MAX_ARGS      64
-# define MAX_ARG_LEN   16
-# define MAX_PATHS     64
-# define MAX_PATH_LEN  96
-# define WHITESPACE    " .,\t\n"
-
-#ifndef NULL
-# define NULL ...
-# endif
+# include <Main.h>
 
 using namespace std;
 
-struct command_t {
-  string name;
-  int argc;
-  vector<string> argv;
-};
-
 int parsePath(vector<string>&);
-int parseCommand(string, struct command_t&);
+int parseCommand(string, Command&);
 
 int main() {
+  vector<string> paths; 
+  Command cmd();  
   string commandLine = "Every good boy does fine";
-  struct command_t command;
-  vector<string> paths;
 
   //Test functions
   parsePath(paths);
-  parseCommand(commandLine, command);
+  parseCommand(commandLine, cmd);
 
   //Display results
-  cout << "\nCommand name: " << command.name << endl;
-  cout << "Number of args: " << command.argc << endl;
+  cout << "\nCommand name: " << cmd.filename << endl;
+  cout << "Number of args: " << cmd.args.size() << endl;
   
   cout << endl << "ARGUMENTS" << endl;
-  for(int i = 0; i < command.argv.size(); i++) 
-    cout << command.argv[i] << endl;
+  for(int i = 0; i < cmd.args.size(); i++) 
+    cout << cmd.args[i] << endl;
   
   cout << endl << "PATHS" << endl;
   for(int i = 0; i < paths.size(); i++) 
@@ -52,32 +36,24 @@ int main() {
 }
 
 
-
-int parseCommand(string cLine, struct command_t& cmd) {
+int parseCommand(string cLine, Command& cmd) {
 /*********************************************************
 * This function takes user input from the command line and
 * parses the string into a vector of substrings using 
 * whitespace as the delimiter.
 *********************************************************/
 
-  int argc = 0;
   string token;
   stringstream ss(cLine);
     
   //Split the command line string. Push substrings to vector
-  while(getline(ss, token, ' ')) 
-  {
-    cmd.argv.push_back(token);
-    argc++;
-  }
+  while(getline(ss, token, ' ')) cmd.args.push_back(token);
 
-  //Set the command name and number of arguments
-  cmd.argc = argc;
-  cmd.name = cmd.argv[0];
+  //Set the command name
+  cmd.filename = cmd.args[0];
 
   return 1;
 }
-
 
 
 int parsePath(vector<string>& dirs) {
@@ -96,4 +72,3 @@ int parsePath(vector<string>& dirs) {
 
   return 1;
 }
-
