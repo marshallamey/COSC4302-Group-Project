@@ -6,7 +6,7 @@
 #include "Command.hpp"
 
 // To execute run the following commands
-// $ gcc -std=c++11 -o parser-test Parser.cpp Parser.hpp ParserTest.cpp UnixHelper.hpp UnixHelper.cpp Command.hpp Command.cpp
+// $ g++ -std=c++11 -o parser-test Parser.cpp Parser.hpp ParserTest.cpp UnixHelper.hpp UnixHelper.cpp Command.hpp Command.cpp
 // $ ./parser-test
 
 int main() {
