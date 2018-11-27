@@ -42,9 +42,13 @@ int main() {
     std::string find_path = path_resolver("find");
     std::cout << (find_path == "/usr/bin/find") << '\n';
     
-    // Test 3b: Path Resolve for local script (e.g. not found in any PATH folders)
+    // Test 3c: Path Resolve for local script (e.g. not found in any PATH folders)
     std::string myscript_path = path_resolver("myscript");
     std::cout << (myscript_path == (get_cwd() + "/myscript")) << '\n';
+    
+    // Test 3d: Path Resolve for slashed command
+    std::string myscript_path = path_resolver("/bin/ls");
+    std::cout << (myscript_path == "/bin/ls") << '\n';
     
     // Test 4a: Echo Command
     Command echo = make_command(" echo  hello   world   ");
@@ -62,11 +66,19 @@ int main() {
     std::cout << (find.get_args() ==  expected_find_args) << '\n';
     find.excecute();
     
-    // Test 4b: Local Script Command
+    // Test 4c: Local Script Command
     std::string myscript = make_command("myscript");
     std::vector<std::string> expected_myscript_args {
         get_cwd() + "/myscript"
     });
     std::cout << (myscript.get_args() ==  expected_myscript_args) << '\n';
     myscript.excecute();
+    
+    // Test 4b: Slash Command
+    Command ls = make_command("/bin/ls     .  ");
+    std::vector<std::string> expected_ls_args {
+        "/bin/ls", "."
+    });
+    std::cout << (ls.get_args() ==  expected_ls_args) << '\n';
+    ls.excecute();
 }
