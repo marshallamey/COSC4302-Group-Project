@@ -78,7 +78,9 @@ int parseCommand(string cLine, Command& cmd) {
 
   // **MyBad: I have change the Header file for Command objects, There is no need to handle the 
   //        filename field any more. If will be assumed from the first item of the argument list
-  
+  // **Issue: Remember that Command objects have no means of Path Resolution, it is on you
+  //        to determined the absolute location of the progam file an reassign the first item 
+  //        item of the argument list to said absolute Location.
   //Set the command name
   cmd.filename = cmd.args[0];
 
