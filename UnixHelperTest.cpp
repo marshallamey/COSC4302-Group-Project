@@ -2,7 +2,7 @@
 #include <iostream>
 
 // To run test, run the following commands
-// $ gcc -std=c++11 -o unix-test UnixHelper.hpp UnixHelper.cpp UnixHelperTest.cpp
+// $ g++ -std=c++11 -o unix-test UnixHelper.hpp UnixHelper.cpp UnixHelperTest.cpp
 // $ ./unix-test
 
 int main () {
