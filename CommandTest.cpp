@@ -4,7 +4,7 @@
 #include <string>
 
 // To execute Run the following commands
-// $ gcc -std=c++11 -o command-test Command.cpp Command.hpp CommandTest.cpp
+// $ g++ -std=c++11 -o command-test Command.cpp Command.hpp CommandTest.cpp
 // $ ./command-test
 // Remember to use CTRL-D exit out of Test 4.
 
