@@ -26,15 +26,15 @@ Command::Command(const std::vector<std::string>& args)
 //   throw an exception on the CHILD PROCESS to ensure
 //   the command args are properly destructed
 void Command::execute() {
-  if (!args.empty()) {
-    if (fork() == 0) {
-      auto argv = to_argv(args);
-      execv(argv.front(), argv.data());
-      throw ExecutionException { args[0] + ": " + strerror(errno) };  
-    } else {
-      wait(nullptr);
+    if (!args.empty()) {
+        if (fork() == 0) {
+            auto argv = to_argv(args);
+            execv(argv.front(), argv.data());
+            throw ExecutionException { args[0] + ": " + strerror(errno) };  
+        } else {
+            wait(nullptr);
+        }
     }
-  }
 }
 
 // Arguments accessor
