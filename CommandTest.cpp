@@ -5,7 +5,6 @@
 
 // To run test, run the following commands
 // $ make CommandTest
-// $ ./command-test
 // Remember to use CTRL-D exit out of Test 4.
 
 int main() {
