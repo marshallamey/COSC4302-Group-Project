@@ -39,7 +39,7 @@ void Command::execute() {
 
 // Arguments accessor
 const std::vector<std::string>& Command::get_args() const {
-  return args;
+    return args;
 }
 
 // A Simple Exception with a message explaining what went wrong
