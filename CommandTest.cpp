@@ -3,8 +3,8 @@
 #include <vector>
 #include <string>
 
-// To execute Run the following commands
-// $ g++ -std=c++11 -o command-test Command.cpp Command.hpp CommandTest.cpp
+// To run test, run the following commands
+// $ make CommandTest
 // $ ./command-test
 // Remember to use CTRL-D exit out of Test 4.
 
@@ -26,7 +26,6 @@ int main() {
     Command echo { echo_args };
     std::cout << (echo.get_args() == echo_args) << '\n';
     echo.execute();
-
     
     // Test 4: Test input/output command (CTRL-D to exit)
     std::vector<std::string> grep_args {"/bin/grep", "[aeiou]"};
