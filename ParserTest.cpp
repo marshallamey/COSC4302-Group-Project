@@ -5,7 +5,6 @@
 
 // To run test, run the following commands
 // $ make ParserTest
-// $ ./parser-test
 
 // Expected: 1111111111111
 int main() {
