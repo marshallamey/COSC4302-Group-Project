@@ -3,11 +3,16 @@
 
 #include <string>
 
-// Get CS Path for Path Resolution
-// This is a colon seperated list of directories
+// Retreive the confstr(_CS_PATH), a list of directories containing system-level POSIX programs
 std::string get_cs_path();
 
-// Get Current Working Directory
+// Retreive the current working directory
 std::string get_cwd();
+
+// Test if the file at the given path exists
+bool exists(const std::string& path);
+
+// Test if the file at the given path is executable.
+bool executable(const std::string& path);
 
 #endif // UNIX_HELPER_H
