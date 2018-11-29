@@ -3,7 +3,6 @@
 
 // To run test, run the following commands
 // $ make UnixHelperTest
-// $ ./unix-helper-test
 
 int main () {
     std::cout << get_cs_path() << '\n';       // Expected: /bin:/usr/bin
