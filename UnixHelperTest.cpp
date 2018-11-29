@@ -2,8 +2,8 @@
 #include <iostream>
 
 // To run test, run the following commands
-// $ g++ -std=c++11 -o unix-test UnixHelper.hpp UnixHelper.cpp UnixHelperTest.cpp
-// $ ./unix-test
+// $ make UnixHelperTest
+// $ ./unix-helper-test
 
 int main () {
     std::cout << get_cs_path() << '\n';       // Expected: /bin:/usr/bin
