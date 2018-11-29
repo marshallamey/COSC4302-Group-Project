@@ -3,8 +3,8 @@
 #include "Command.hpp"
 #include <iostream>
 
-// To execute run the following commands
-// $ g++ -std=c++11 -o parser-test Parser.cpp Parser.hpp ParserTest.cpp UnixHelper.hpp UnixHelper.cpp Command.hpp Command.cpp
+// To run test, run the following commands
+// $ make ParserTest
 // $ ./parser-test
 
 // Expected: 1111111111111
