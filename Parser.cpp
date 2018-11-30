@@ -11,7 +11,7 @@ std::string path_resolver(const std::string& program_name) {
 }
 
 Command make_command(const std::string& document) {
-    return Command {{
-        "/bin/echo", "hello", "world"
-    }};
+    return Command {
+        "/bin/echo", {"echo", "hello", "world"}
+    };
 }
