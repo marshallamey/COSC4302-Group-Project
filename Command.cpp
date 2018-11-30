@@ -1,10 +1,9 @@
-#include <vector>
-#include <string>
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
 #include <sys/wait.h>
 #include "Command.hpp"
+
 
 // Converts a vector of strings to a vector of mutable char *
 std::vector<char*> to_argv(const std::vector<std::string>& args) {
@@ -16,25 +15,31 @@ std::vector<char*> to_argv(const std::vector<std::string>& args) {
     return argv;
 }
 
-// Contruct a command from a an arguement vector
-// As per POSIX standards, the first arguement is the 
-// path to program it self.
-Command::Command(const std::vector<std::string>& args)
-    : args(args) { }
+// Contruct a no-operation command 
+Command::Command() : filename(), args() { }
+
+// Contruct a command from a an arguement vector and filename
+Command::Command(const std::string& filename, const std::vector<std::string>& args)
+    : filename(filename), args(args) { }
 
 // Forks a process and executes a command or 
-//   throw an exception on the CHILD PROCESS to ensure
-//   the command args are properly destructed
+// throw an exception on the CHILD PROCESS to ensure
+// all objects are properly destructed
 void Command::execute() {
     if (!args.empty()) {
         if (fork() == 0) {
             auto argv = to_argv(args);
-            execv(argv.front(), argv.data());
+            execv(filename.c_str(), argv.data());
             throw ExecutionException { args[0] + ": " + strerror(errno) };  
         } else {
-            wait(nullptr);
+          wait(nullptr);
         }
     }
+}
+
+// File name accessor
+const std::string& Command::get_filename() const {
+    return filename;
 }
 
 // Arguments accessor
