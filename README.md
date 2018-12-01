@@ -3,23 +3,33 @@ COSC4302 Group Project
 
 ## Building and Running Shell Program
 
-> $ make
-> $ ./shell
+```bash
+$ make
+$ ./shell
+```
 
 ## Running Test Code
 
 To test the Parser Component:
 
-> $ make ParserTest
+```bash
+$ make ParserTest
+```
 
 To test the Unix Helper Component:
 
-> $ make UnixHelperTest
+```bash
+$ make UnixHelperTest
+```
 
 To test the Command Component:
 
-> $ make CommandTest
+```bash
+$ make CommandTest
+```
 
 ## Clean up code
 
-> $ make clean
+```bash
+$ make clean
+```
