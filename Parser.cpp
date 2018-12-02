@@ -21,7 +21,7 @@ std::string path_resolver(const std::string& program_name) {
     if (program_name.at(0) == '/') return program_name;
 
     // Else search the directories in $PATH environment variable
-    std::vector<std::string> paths = tokenize(string(getenv("PATH"), ':');
+    std::vector<std::string> paths = tokenize(string(getenv("PATH")), ':');
     return std::string { };
     
     // Else if $PATH not defined, search the directories in CS_PATH config variable
