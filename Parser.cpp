@@ -7,18 +7,18 @@
 
 
 std::vector<std::string> tokenize(const std::string& document, const std::string& delimiters) {
-    std::stringstream ss(document);
-    std::string token;
     std::vector<std::string> tokens;
-    
-    // **Kishan Patel: I'm fairly certain this will fail the Unit Tests 
-    //               : as in probaly push empty tokens in the vector,  
-    //               : Maybe a for loop and std::string::substr will help you here
-    //               : https://en.cppreference.com/w/cpp/string/basic_string/substr
-    //               : Also the change api means will more than one delimiter to consider
-    //               : (e.g. their are 4 distinct whitespace characters) 
-    //               : meaning std::getline won't work anyways.
-    while( getline(ss, token, delimiters[0]) ) tokens.push_back(token);
+    std::size_t start = document.find_first_not_of(delimiters), end = 0;
+    //std::cout << "START: " << start <<"\n";
+    while ((end = document.find_first_of(delimiters, start)) != std::string::npos) {
+        tokens.push_back(document.substr(start, end - start));
+        start = document.find_first_not_of(delimiters, end);
+    }
+
+    if (start != std::string::npos) {
+        tokens.push_back(document.substr(start));
+    }  
+
     return tokens; 
 }
 
