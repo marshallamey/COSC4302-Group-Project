@@ -106,5 +106,5 @@ int main() {
     assert_equals("", empty.get_filename());
     assert_equals({ }, empty.get_args());
 
-    std::cout << '\n';
+    std::cout << std::endl;
 }
