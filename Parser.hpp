@@ -20,7 +20,7 @@
  *     ignored, and the file at the specified pathname is executed.
  */
 
-std::vector<std::string> tokenize(const std::string& document, char delimiter);
+std::vector<std::string> tokenize(const std::string& document, const std::string& delimiters);
 
 std::string path_resolver(const std::string& program_name);
 
