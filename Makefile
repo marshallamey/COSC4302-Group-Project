@@ -6,8 +6,8 @@ all: Shell
 Shell : Shell.cpp Parser.o UnixHelper.o Command.o
 	$(COMPILER) $(FLAGS) -o shell Shell.cpp Parser.o UnixHelper.o Command.o &&  echo "\n CREATED ./shell PROGRAM "
 	
-ParserTest : ParserTest.cpp Parser.o Command.o
-	$(COMPILER) $(FLAGS) -o parser-test ParserTest.cpp Parser.o Command.o && ./parser-test
+ParserTest : ParserTest.cpp Parser.o Command.o UnixHelper.o
+	$(COMPILER) $(FLAGS) -o parser-test ParserTest.cpp Parser.o Command.o UnixHelper.o && ./parser-test
 
 UnixHelperTest : UnixHelperTest.cpp UnixHelper.o
 	$(COMPILER) $(FLAGS) -o unix-helper-test UnixHelperTest.cpp UnixHelper.o && ./unix-helper-test
