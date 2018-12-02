@@ -29,7 +29,7 @@ int main() {
         cat.execute();
    
     
-        // Test 2: Test output ofenviroment variable
+        // Test 2: Test output of enviroment variable
         std::string printenv_filename { "/usr/bin/printenv" };
         std::vector<std::string> printenv_args { "printenv", "PATH" };
     
