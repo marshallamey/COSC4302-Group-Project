@@ -1,7 +1,6 @@
-# include <stdio.h>
-# include <unistd.h>
-//# include <shell.hpp>
-# include <Parser.hpp>
+#include <iostream>
+#include <string>
+//#include <Parser.hpp>
 
 #define MAX_ARGS 64
 #define MAX_ARG_LEN 16
@@ -12,49 +11,62 @@
 void printPrompt();
 void readCommand(char *);
 
-//OBSOLETE
-stuct command_t{
-    chr *name;
-    int argc;
-    char *argv[MAX_ARGS];
-}
-
 /*Function prototypes, which exist in ShellTest already??? */
 int parseCommand(char *, struct command_t);
 
-void printPrompt(){
+void printPrompt()
+{
     //TODO:  Build out prompt?
     //String promptString = "";
-    printf("s",PROMPT_CHARACTER);
+
+    std::string prompt = "Conch";
+    prompt.append(PROMPT_CHARACTER);
+    //printf(prompt);
+    std::cout << prompt;
 }
 
-void readCommand(char *buffer){
+void readCommand(char *buffer)
+{
     //TODO:  Upgrade this.
-    gets(buffer);
+    //gets(buffer);
 }
 
-int main(int argc, char *argv[]){
+int main()
+{
     int i;
     int pid;
     int status;
     FILE *fid;
     char cmdLine[MAX_LINE_LEN];
 
-    //Startup
-    printPrompt();
+    //Initialize Shell
+
     //Input Loop
-    while (1){
+    while (1)
+    {
+        printPrompt();
         //Wait for next input
-        
+        std::string command;
+        getline(std::cin, command);
+
         //Act on input
-        
-        //Just exit for now
-        exit;
+
+        //Exit command
+        if (command == "exit")
+        {
+            return 0;
+        }
+        else
+        {
+            //Parse command.
+        }
     }
 
-    //OBSOLETE
-
-    //Normal exit.
-    printf("Terminating successfully.  Goodbye.");
-    return 0;
+    //Just exit for now
 }
+
+//OBSOLETE
+
+//Normal exit.
+//printf("Terminating successfully.  Goodbye.");
+//return 0;
