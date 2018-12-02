@@ -35,7 +35,7 @@ void assert_equals(const std::string expected, const std::string actual) {
 // To execute run the following commands
 // $ make ParserTest
 
-// Expected: 111111 111 11111111
+// Expected: 11111 111 11111111
 int main() {
     // Test 1a: Tokenize space-delimted string
     std::vector<std::string> args1 = 
