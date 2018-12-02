@@ -9,19 +9,23 @@
 
 std::vector<std::string> tokenize(const std::string& document, const std::string& delimiters) {
     std::vector<std::string> tokens;
+    
+    // Skip beginning delimiters
     std::size_t start = document.find_first_not_of(delimiters), end = 0;
-    //std::cout << "START: " << start <<"\n";
+    
+    //Find tokens
     while ((end = document.find_first_of(delimiters, start)) != std::string::npos) {
         tokens.push_back(document.substr(start, end - start));
         start = document.find_first_not_of(delimiters, end);
     }
+    
+    // If there is one last token, push to tokens
     if (start != std::string::npos) tokens.push_back(document.substr(start)); 
 
     return tokens;
 }
 
 std::string path_resolver(const std::string& program_name) {
-
     // If path starts with a slash, return it as it is
     if (program_name.find("/") != std::string::npos) return program_name;
 
