@@ -1,11 +1,19 @@
-#include <iostream>
 #include <string>
 #include <vector>
-#include <sstream>
 #include <unistd.h>
 #include <cstdlib>
+#include "UnixHelper.hpp"
 #include "Parser.hpp"
 #include "Command.hpp"
+
+// Helper Function: Get PATH from ENV or CONFIGURATION
+std::string get_path() {
+    std::string env_path {std::getenv("PATH")};
+    return env_path.empty() 
+        ? get_cs_path() 
+        : env_path;
+}
+
 
 std::vector<std::string> tokenize(const std::string& document, const std::string& delimiters) {
     std::vector<std::string> tokens;
@@ -27,17 +35,16 @@ std::vector<std::string> tokenize(const std::string& document, const std::string
 
 std::string path_resolver(const std::string& program_name) {
     // If path starts with a slash, return it as it is
-    if (program_name.find("/") != std::string::npos) return program_name;
+    if (program_name.find('/') != std::string::npos) return program_name;
 
     // Else search the directories in $PATH environment variable
-    std::vector<std::string> paths = tokenize(std::string(getenv("PATH")), ":");
-    for(int i = 0; i < int(paths.size()); i++) {
-        std::string path = paths[i] + "/" + program_name;
-        if( access( path.c_str(), F_OK) == 0 ) return path;
+    std::vector<std::string> paths = tokenize(get_path(), ":");
+    for(const std::string& directory : paths) {
+        std::string path = directory + "/" + program_name;
+        if(exists(path) && executable(path)) return path;
     }
     
     // Else return path not found 
-    std::cout << program_name << ": Path not found\n";
     return program_name; 
 }
 
@@ -46,9 +53,9 @@ Command make_command(const std::string& document) {
     std::vector<std::string> args = tokenize(document, " \n\t\r");
     
     // If no args, return empty Command
-    if( args.size() == 0 ) return Command();
+    if( args.empty() ) return Command();
 
     // Else return Command with args
-    std::string filename = path_resolver(args[0]);
+    std::string filename = path_resolver(args.front());
     return Command(filename, args);
 }
