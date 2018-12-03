@@ -1,3 +1,9 @@
+
+// Author: Alexander Macey
+// Instructor: Bo Sun
+// COSC 4302: Operating Systems
+// Shell Component - Source
+
 #include <iostream>
 #include <string>
 #include "Parser.hpp"
