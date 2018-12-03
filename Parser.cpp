@@ -1,3 +1,8 @@
+// Author: Marshall Amey
+// Instructor: Bo Sun
+// COSC 4302: Operating Systems
+// Command Component - Source
+
 #include "Parser.hpp"
 #include "UnixHelper.hpp"
 #include "Command.hpp"
