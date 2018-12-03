@@ -1,10 +1,8 @@
-#include <string>
-#include <vector>
-#include <unistd.h>
-#include <cstdlib>
-#include "UnixHelper.hpp"
 #include "Parser.hpp"
+#include "UnixHelper.hpp"
 #include "Command.hpp"
+#include <cstdlib>
+
 
 // Helper Function: Get PATH from ENV or CONFIGURATION
 std::string get_path() {
@@ -41,7 +39,7 @@ std::string path_resolver(const std::string& program_name) {
     std::vector<std::string> paths = tokenize(get_path(), ":");
     for(const std::string& directory : paths) {
         std::string path = directory + "/" + program_name;
-        if(exists(path) && executable(path)) return path;
+        if( exists(path) && executable(path) ) return path;
     }
     
     // Else return path not found 
