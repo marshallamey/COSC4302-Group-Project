@@ -3,8 +3,6 @@
 #include "Parser.hpp"
 #include "Command.hpp"
 #include "UnixHelper.hpp"
-#include <readline/readline.h>
-#include <readline/history.h>
 
 #define MAX_ARGS 64
 #define MAX_ARG_LEN 16
@@ -65,11 +63,9 @@ int main()
             catch (ExecutionException e)
             {
                 std::cout << "An exception occurred: " << e.what() << '\n';
-                return 0; //Quit this process.  Seems a bit dangerous.  Need to lookk at improving this.
+                return 0;
             }
         }
     }
-
     //We should not reach this.
-    std::cout << "These aren't the Strings you're looking for.";
 }
