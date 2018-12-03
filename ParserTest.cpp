@@ -2,84 +2,109 @@
 #include "Command.hpp"
 #include <iostream>
 
+void assert_equals(const std::vector<std::string> expected, const std::vector<std::string> actual) {
+    if (expected == actual) {
+        std::cout << 1;
+    } else {
+        std::cout << "\n";
+        std::cout << "\nExpected:";
+        for (auto& item : expected) { 
+            std::cout << " \"" << item << "\"";
+        }
+        std::cout << "\nActual:";
+        for (auto& item : actual) { 
+            std::cout << " \"" << item << "\"";
+        }
+        std::cout << "\n";
+    }
+}
+
+
+void assert_equals(const std::string expected, const std::string actual) {
+    if (expected == actual) {
+        std::cout << 1;
+    } else {
+        std::cout << "\n";
+        std::cout << "\nExpected: \"" << expected << "\"";
+        std::cout << "\nActual: \"" << actual << "\"";
+        std::cout << "\n";
+    }
+}
+
+
 // To execute run the following commands
 // $ make ParserTest
 
-// Expected: 1111 111 11111111
+// Expected: 11111 111 11111111
 int main() {
     // Test 1a: Tokenize space-delimted string
     std::vector<std::string> args1 = 
-        tokenize("   hello  world foo      bar baz", ' ');
+        tokenize("   hello  world\tfoo   \n   bar baz", " \n\t\r");
     std::vector<std::string> expected_args1 {
         "hello", "world", "foo", "bar", "baz"
     };   
-    std::cout << (args1 == expected_args1);
+    assert_equals(expected_args1, args1);
 
     // Test 1b: Tokenize empty string
-    std::vector<std::string> args2 = tokenize("", ' ');
-    std::cout << args2.empty();
+    std::vector<std::string> args2 = tokenize("", " \n\t\r");
+    assert_equals({ }, args2);
     
     // Test 1c: Tokenize space-only string
-    std::vector<std::string> args3 = tokenize("   ", ' ');
-    std::cout << args3.empty();
+    std::vector<std::string> args3 = tokenize(" \n\t", " \n\t\r");
+    assert_equals({ }, args3);
+    
+    // Test 1d: Tokenize single token string
+    std::vector<std::string> args4 = tokenize("foo", " \n\t\r");
+    assert_equals({ "foo" }, args4);
 
-    // Test 1d: Tokenize colon-delimted string
+    // Test 1e: Tokenize colon-delimted string
     std::vector<std::string> paths = 
-        tokenize("/bin:/sbin:::/usr/bin:::/usr/sbin/::::", ':');
+        tokenize("/bin:/sbin:::/usr/bin:::/usr/sbin/::::", ":");
     std::vector<std::string> expected_paths {
         "/bin", "/sbin", "/usr/bin", "/usr/sbin/"
     };
-    std::cout << (paths == expected_paths);
+    assert_equals(expected_paths, paths);
 
     std::cout << ' ';
     
     // Test 2a: Path Resolve for /bin
     std::string echo_path = path_resolver("echo");
-    std::cout << (echo_path == "/bin/echo");
+    assert_equals("/bin/echo", echo_path);
 
     // Test 2b: Path Resolve for /usr/bin
     std::string find_path = path_resolver("find");
-    std::cout << (find_path == "/usr/bin/find");
+    assert_equals("/usr/bin/find", find_path);
     
     // Test 2c: Path Resolve for slashed command
     std::string ls_path = path_resolver("/bin/ls");
-    std::cout << (ls_path == "/bin/ls");
+    assert_equals("/bin/ls", ls_path);
     
     std::cout << ' ';
     
     // Test 3a: Echo Command
-    std::string expected_echo_filename { "/bin/echo" };
-    std::vector<std::string> expected_echo_args { "echo", "hello", "world" };
-    
     Command echo = make_command(" echo  hello   world   ");
     
-    std::cout << (echo.get_filename() == expected_echo_filename);
-    std::cout << (echo.get_args() == expected_echo_args);
+    assert_equals("/bin/echo", echo.get_filename());
+    assert_equals({ "echo", "hello", "world" }, echo.get_args());
 
     // Test 3b: Find Command
-    std::string expected_find_filename { "/usr/bin/find" };
-    std::vector<std::string> expected_find_args { "find", "." };
-    
     Command find = make_command("find     .  ");
     
-    std::cout << (find.get_filename() == expected_find_filename);
-    std::cout << (find.get_args() == expected_find_args);
+    assert_equals("/usr/bin/find", find.get_filename());
+    assert_equals({ "find", "." }, find.get_args());
     
 
     // Test 3c: Slash Command
-    std::string expected_ls_filename { "/bin/ls" };
-    std::vector<std::string> expected_ls_args { "/bin/ls", "." };
-    
     Command ls = make_command("/bin/ls     .  ");
     
-    std::cout << (ls.get_filename() == expected_ls_filename);
-    std::cout << (ls.get_args() == expected_ls_args);
+    assert_equals("/bin/ls", ls.get_filename());
+    assert_equals({ "/bin/ls", "." }, ls.get_args());
     
     // Test 3d: Empty Command
     Command empty = make_command("  ");
     
-    std::cout << empty.get_filename().empty();
-    std::cout << empty.get_args().empty();
+    assert_equals("", empty.get_filename());
+    assert_equals({ }, empty.get_args());
 
-    std::cout << '\n';
+    std::cout << std::endl;
 }
