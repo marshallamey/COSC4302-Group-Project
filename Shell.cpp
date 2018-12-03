@@ -10,10 +10,6 @@
 #include "Command.hpp"
 #include "UnixHelper.hpp"
 
-#define MAX_ARGS 64
-#define MAX_ARG_LEN 16
-#define MAX_LINE_LEN 128
-#define WHITESPACE ".,\t\n"
 #define PROMPT_CHARACTER ">"
 #define PROMPT_NAME "conch"
 
