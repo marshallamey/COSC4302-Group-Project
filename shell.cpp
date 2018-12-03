@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
-//#include <Parser.hpp>
+#include "Parser.hpp"
+#include "Command.hpp"
 
 #define MAX_ARGS 64
 #define MAX_ARG_LEN 16
@@ -11,15 +12,12 @@
 void printPrompt();
 void readCommand(char *);
 
-/*Function prototypes, which exist in ShellTest already??? */
-int parseCommand(char *, struct command_t);
-
 void printPrompt()
 {
     //TODO:  Build out prompt?
     //String promptString = "";
 
-    std::string prompt = "Conch";
+    std::string prompt = "conch";
     prompt.append(PROMPT_CHARACTER);
     //printf(prompt);
     std::cout << prompt;
@@ -37,7 +35,7 @@ int main()
     int pid;
     int status;
     FILE *fid;
-    char cmdLine[MAX_LINE_LEN];
+    std::string cmdLine;
 
     //Initialize Shell
 
@@ -46,19 +44,31 @@ int main()
     {
         printPrompt();
         //Wait for next input
-        std::string command;
-        getline(std::cin, command);
+        getline(std::cin, cmdLine);
 
         //Act on input
 
         //Exit command
-        if (command == "exit")
+        if (cmdLine == "exit")
         {
             return 0;
         }
         else
         {
             //Parse command.
+
+            //Execute command
+            try
+            {
+                //Create command object.
+                Command my_command = make_command(cmdLine);
+                //Try execute
+                my_command.execute();
+            }
+            catch (ExecutionException e)
+            {
+                std::cout << "An exception occurred. " << e.what() << '\n';
+            }
         }
     }
 
