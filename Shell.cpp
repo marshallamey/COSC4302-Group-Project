@@ -11,6 +11,7 @@
 #define PROMPT_CHARACTER ">"
 #define PROMPT_NAME "conch"
 
+//Formats the prompt and outputs to terminal.
 void printPrompt()
 {
     //TODO:  Build out prompt?
@@ -27,10 +28,6 @@ void printPrompt()
 
 int main()
 {
-    int i;
-    int pid;
-    int status;
-    FILE *fid;
     std::string cmdLine;
 
     //Initialize Shell
@@ -57,7 +54,6 @@ int main()
             //Execute command
             try
             {
-                //Try execute
                 my_command.execute();
             }
             catch (ExecutionException e)
