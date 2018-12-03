@@ -3,8 +3,8 @@ FLAGS=-std=c++11 -Wall -Wextra -Wpedantic
 
 all: Shell
 
-Shell : Shell.cpp Parser.o UnixHelper.o Command.o
-	$(COMPILER) $(FLAGS) -o shell Shell.cpp Parser.o UnixHelper.o Command.o &&  echo "\n CREATED ./shell PROGRAM "
+Shell : Shell.cpp Parser.cpp UnixHelper.cpp Command.cpp
+	$(COMPILER) $(FLAGS) -o shell Shell.cpp Parser.cpp UnixHelper.cpp Command.cpp &&  echo "\n CREATED ./shell PROGRAM "
 	
 ParserTest : ParserTest.cpp Parser.o Command.o UnixHelper.o
 	$(COMPILER) $(FLAGS) -o parser-test ParserTest.cpp Parser.o Command.o UnixHelper.o && ./parser-test
