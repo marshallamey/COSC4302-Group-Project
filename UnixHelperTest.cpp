@@ -1,3 +1,8 @@
+// Author: Kishan Patel
+// Instructor: Bo Sun
+// COSC 4302: Operating Systems
+// Unix Helper Component - Test
+
 #include "UnixHelper.hpp"
 #include <iostream>
 
