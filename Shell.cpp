@@ -14,8 +14,6 @@
 //Formats the prompt and outputs to terminal.
 void printPrompt()
 {
-    //TODO:  Build out prompt?
-    //String promptString = "";
     std::string prompt;
     prompt.append(getenv("USER"));
     prompt.append("@");
@@ -29,8 +27,6 @@ void printPrompt()
 int main()
 {
     std::string cmdLine;
-
-    //Initialize Shell
 
     //Input Loop
     while (1)
