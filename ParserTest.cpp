@@ -1,3 +1,8 @@
+// Author: Kishan Patel
+// Instructor: Bo Sun
+// COSC 4302: Operating Systems
+// Parser Component - Test
+
 #include "Parser.hpp"
 #include "Command.hpp"
 #include <iostream>
