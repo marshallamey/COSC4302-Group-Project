@@ -97,4 +97,6 @@ int main()
         }
     }
     //Only reach this if you killed CIN
+    std::cout << "Goodbye.\n";
+
 }
